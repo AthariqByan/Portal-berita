@@ -46,7 +46,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
+                    {{-- <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="#">Home</a>
                     </li>
                     <li class="nav-item">
@@ -60,7 +60,7 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Technology</a>
-                    </li>
+                    </li> --}}
                 </ul>
                 <form class="d-flex">
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
@@ -79,87 +79,74 @@
             <button type="button" data-bs-target="#newsCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
         </div>
         <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img src="https://via.placeholder.com/1200x400" class="d-block w-100" alt="News 1">
-                <div class="carousel-caption d-none d-md-block">
-                    <h5>Headline News 1</h5>
-                    <p>Description for headline news 1.</p>
+            @foreach ($news as $n)
+                <div class="carousel-item active">
+                    <img src="images/{{ $n->gambar }}" class="card-img-top" alt="News Image">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5 class="card-title news-title">{{ $n->name }}</h5>
+                        {{-- <p>Description for headline news 1.</p> --}}
+                    </div>
                 </div>
-            </div>
-            <div class="carousel-item">
-                <img src="https://via.placeholder.com/1200x400" class="d-block w-100" alt="News 2">
-                <div class="carousel-caption d-none d-md-block">
-                    <h5>Headline News 2</h5>
-                    <p>Description for headline news 2.</p>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <img src="https://via.placeholder.com/1200x400" class="d-block w-100" alt="News 3">
-                <div class="carousel-caption d-none d-md-block">
-                    <h5>Headline News 3</h5>
-                    <p>Description for headline news 3.</p>
-                </div>
-            </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#newsCarousel"
+                    data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#newsCarousel"
+                    data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            @endforeach
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#newsCarousel" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#newsCarousel" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
-    </div>
 
-    <!-- Main Content -->
-    <div class="container mt-4">
-        <div class="row">
-            <div class="col-md-8">
-                <h2 class="mb-4">Latest News</h2>
-                <div class="row row-cols-1 row-cols-lg-3 g-4">
-                    @foreach ($news as $n)
-                        <!-- News Item 1 -->
-                        <div class="col">
-                            <div class="card h-100">
-                                <img src="images/{{ $n->gambar }}" class="card-img-top" alt="News Image">
-                                <div class="card-body">
-                                    <h5 class="card-title news-title">{{ $n->name }}</h5>
-                                    <p class="card-text news-content">{{ $n->isi }}</p>
-                                    <a href="#" class="btn btn-primary">Read More</a>
+        <!-- Main Content -->
+        <div class="container mt-4">
+            <div class="row">
+                <div class="col-md-8">
+                    <h2 class="mb-4">Latest News</h2>
+                    <div class="row row-cols-1 row-cols-lg-3 g-4">
+                        @foreach ($news as $n)
+                            <!-- News Item 1 -->
+                            <div class="col">
+                                <div class="card h-100">
+                                    <img src="images/{{ $n->gambar }}" class="card-img-top" alt="News Image">
+                                    <div class="card-body">
+                                        <h5 class="card-title news-title">{{ $n->name }}</h5>
+                                        {{-- <p class="card-text news-content">{{ $n->isi }}</p> --}}
+                                        <a href="#" class="btn btn-primary">Read More</a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    @endforeach
+                        @endforeach
+                    </div>
                 </div>
-            </div>
 
-            <div class="col-md-4">
-                <h2 class="mb-4">Kategori</h2>
-                <div class="list-group">
-                    <a href="#" class="list-group-item list-group-item-action">News</a>
-                    <a href="#" class="list-group-item list-group-item-action">Sports</a>
-                    <a href="#" class="list-group-item list-group-item-action">Entertainment</a>
-                    <a href="#" class="list-group-item list-group-item-action">Technology</a>
-                    <a href="#" class="list-group-item list-group-item-action">Health</a>
+                <div class="col-md-4">
+                    <h2 class="mb-4">Kategori</h2>
+                    <div class="list-group">
+                        @foreach ($kategori as $k)
+                            <a href="{{  }}" class="list-group-item list-group-item-action">{{ $k->kategori }}</a>
+                        @endforeach
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Footer -->
-    <div class="footer mt-4">
-        <div class="container">
-            <p class="mb-0">© 2024 Portal Berita. All rights reserved.</p>
+        <!-- Footer -->
+        <div class="footer mt-4">
+            <div class="container">
+                <p class="mb-0">© 2024 Portal Berita. All rights reserved.</p>
+            </div>
         </div>
-    </div>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous">
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
-        integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous">
-    </script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+            integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous">
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+            integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous">
+        </script>
 </body>
 
 
