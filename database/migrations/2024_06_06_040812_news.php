@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('gambar');
-            $table->string('isi');
+            $table->text('isi');
             $table->foreignId('id_kategori');
             $table->rememberToken();
             $table->timestamps();
