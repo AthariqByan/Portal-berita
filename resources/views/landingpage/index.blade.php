@@ -126,7 +126,7 @@
                     <h2 class="mb-4">Kategori</h2>
                     <div class="list-group">
                         @foreach ($kategori as $k)
-                            <a href="{{  }}" class="list-group-item list-group-item-action">{{ $k->kategori }}</a>
+                            <a href="#" class="list-group-item list-group-item-action">{{ $k->kategori }}</a>
                         @endforeach
                     </div>
                 </div>
