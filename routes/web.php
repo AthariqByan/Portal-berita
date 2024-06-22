@@ -6,6 +6,8 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\KategoriController;
+use App\Models\Kategori;
+use App\Models\News;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,7 +21,7 @@ use App\Http\Controllers\KategoriController;
 */
 
 Route::get('/', function () {
-    return view('landingpage/index');
+    return view('landingpage/index', ["news" => News::get()], ["kategori" => Kategori::get()]);
 });
 //route login dan register
 Route::get('/login', [LoginController::class, 'index'])->name('login');

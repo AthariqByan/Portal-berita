@@ -117,94 +117,24 @@
             <div class="col-md-8">
                 <h2 class="mb-4">Latest News</h2>
                 <div class="row row-cols-1 row-cols-lg-3 g-4">
-                    <!-- News Item 1 -->
-                    <div class="col">
-                        <div class="card h-100">
-                            <img src="https://via.placeholder.com/800x400" class="card-img-top" alt="News Image">
-                            <div class="card-body">
-                                <h5 class="card-title news-title">News Title 1</h5>
-                                <p class="card-text news-content">This is a longer card with supporting text below as a
-                                    natural
-                                    lead-in to additional content. This content is a little bit longer.</p>
-                                <a href="#" class="btn btn-primary">Read More</a>
+                    @foreach ($news as $n)
+                        <!-- News Item 1 -->
+                        <div class="col">
+                            <div class="card h-100">
+                                <img src="images/{{ $n->gambar }}" class="card-img-top" alt="News Image">
+                                <div class="card-body">
+                                    <h5 class="card-title news-title">{{ $n->name }}</h5>
+                                    <p class="card-text news-content">{{ $n->isi }}</p>
+                                    <a href="#" class="btn btn-primary">Read More</a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-
-                    <!-- News Item 2 -->
-                    <div class="col">
-                        <div class="card h-100">
-                            <img src="https://via.placeholder.com/800x400" class="card-img-top" alt="News Image">
-                            <div class="card-body">
-                                <h5 class="card-title news-title">News Title 2</h5>
-                                <p class="card-text news-content">This is a longer card with supporting text below as a
-                                    natural
-                                    lead-in to additional content. This content is a little bit longer.</p>
-                                <a href="#" class="btn btn-primary">Read More</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- News Item 3 -->
-                    <div class="col">
-                        <div class="card h-100">
-                            <img src="https://via.placeholder.com/800x400" class="card-img-top" alt="News Image">
-                            <div class="card-body">
-                                <h5 class="card-title news-title">News Title 3</h5>
-                                <p class="card-text news-content">This is a longer card with supporting text below as a
-                                    natural
-                                    lead-in to additional content. This content is a little bit longer.</p>
-                                <a href="#" class="btn btn-primary">Read More</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- News Item 4 -->
-                    <div class="col">
-                        <div class="card h-100">
-                            <img src="https://via.placeholder.com/800x400" class="card-img-top" alt="News Image">
-                            <div class="card-body">
-                                <h5 class="card-title news-title">News Title 4</h5>
-                                <p class="card-text news-content">This is a longer card with supporting text below as a
-                                    natural
-                                    lead-in to additional content. This content is a little bit longer.</p>
-                                <a href="#" class="btn btn-primary">Read More</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- News Item 5 -->
-                    <div class="col">
-                        <div class="card h-100">
-                            <img src="https://via.placeholder.com/800x400" class="card-img-top" alt="News Image">
-                            <div class="card-body">
-                                <h5 class="card-title news-title">News Title 5</h5>
-                                <p class="card-text news-content">This is a longer card with supporting text below as a
-                                    natural
-                                    lead-in to additional content. This content is a little bit longer.</p>
-                                <a href="#" class="btn btn-primary">Read More</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- News Item 6 -->
-                    <div class="col">
-                        <div class="card h-100">
-                            <img src="https://via.placeholder.com/800x400" class="card-img-top" alt="News Image">
-                            <div class="card-body">
-                                <h5 class="card-title news-title">News Title 6</h5>
-                                <p class="card-text news-content">This is a longer card with supporting text below as a
-                                    natural
-                                    lead-in to additional content. This content is a little bit longer.</p>
-                                <a href="#" class="btn btn-primary">Read More</a>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
 
             <div class="col-md-4">
-                <h2 class="mb-4">Categories</h2>
+                <h2 class="mb-4">Kategori</h2>
                 <div class="list-group">
                     <a href="#" class="list-group-item list-group-item-action">News</a>
                     <a href="#" class="list-group-item list-group-item-action">Sports</a>
