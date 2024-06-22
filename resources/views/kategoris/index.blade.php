@@ -29,12 +29,13 @@
                             <td>{{ $kategoris->kategori }}</td>
                             <td>
                                 <a href="{{ route('admin.kategoris.edit', $kategoris->id) }}"
-                                    class="btn btn-warning btn-sm">Edit</a>
+                                    class="btn btn-warning btn-sm mb-1" title="Edit"><i class="fas fa-edit"></i></a>
                                 <form action="{{ route('admin.kategoris.destroy', $kategoris->id) }}" method="POST"
                                     style="display:inline-block;">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                                    <button type="submit" class="btn btn-danger btn-sm" title="Hapus"><i
+                                            class="fas fa-trash"></i></button>
                                 </form>
                             </td>
                         </tr>

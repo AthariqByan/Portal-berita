@@ -21,7 +21,8 @@
                 <label for="id_kategori" class="form-label">Kategori</label>
                 <select id="id_kategori" name="id_kategori" class="form-control">
                     @foreach ($kategoris as $kategori)
-                        <option value="{{ $kategori->id }}" {{ old('id_kategori') == $kategori->id ? 'selected' : '' }}>
+                        <option value="{{ $kategori->id }}"
+                            {{ old('id_kategori', $news->id_kategori) == $kategori->id ? 'selected' : '' }}>
                             {{ $kategori->kategori }}
                         </option>
                     @endforeach
@@ -31,4 +32,17 @@
             <button type="submit" class="btn btn-primary">Simpan</button>
         </form>
     </div>
+
+    <!-- Tambahkan script CKEditor -->
+    <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace('isi');
+    </script>
+
+    <!-- Fungsi goBack -->
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
 @endsection

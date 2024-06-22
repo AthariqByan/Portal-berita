@@ -14,4 +14,8 @@ class News extends Model
     {
         return $this->belongsTo(Kategori::class, 'id_kategori');
     }
+    public function scopeFilterByKategori($query, $id_kategori)
+    {
+        return $query->where('id_kategori', $id_kategori);
+    }
 }

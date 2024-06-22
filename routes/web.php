@@ -21,7 +21,21 @@ use App\Models\News;
 */
 
 Route::get('/', function () {
-    return view('landingpage/index', ["news" => News::get()], ["kategori" => Kategori::get()]);
+
+    $kategori = request('kategori');
+    $newsQuery = News::query();
+
+    if ($kategori) {
+        $newsQuery->filterByKategori($kategori);
+    }
+
+    $news = $newsQuery->get();
+    $kategoriList = Kategori::get();
+
+    return view('landingpage/index', [
+        'news' => $news,
+        'kategori' => $kategoriList
+    ]);
 });
 //route login dan register
 Route::get('/login', [LoginController::class, 'index'])->name('login');
@@ -44,3 +58,4 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'show'])->name('admin.profile.show');
     Route::put('/profile', [ProfileController::class, 'update'])->name('admin.profile.update');
 });
+Route::get('/news/{id}', [NewsController::class, 'show'])->name('news.show');
