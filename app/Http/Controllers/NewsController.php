@@ -62,6 +62,7 @@ class NewsController extends Controller
     public function show($id)
     {
         $news = News::findOrFail($id);
+        $news = News::with('kategori')->findOrFail($id);
         return view('news.show', compact('news'));
     }
 
@@ -111,5 +112,15 @@ class NewsController extends Controller
     {
         $news->delete();
         return redirect()->route('admin.news.index')->with('success', 'Data berhasil dihapus');
+    }
+
+    public function showForGuest($id)
+    {
+        // Mengambil berita berdasarkan ID dan kategori terkait
+        $news = News::with('kategori')->findOrFail($id);
+        $kategoris = Kategori::all(); // Mengambil semua data kategori
+
+        // Menampilkan view showForGuest.blade.php dengan data berita dan kategori
+        return view('landingpage.showForGuest', compact('news', 'kategoris'));
     }
 }

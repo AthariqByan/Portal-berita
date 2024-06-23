@@ -37,6 +37,10 @@ Route::get('/', function () {
         'kategori' => $kategoriList
     ]);
 });
+
+// Route untuk halaman detail berita bagi pengguna yang tidak login
+Route::get('/news/{id}', [NewsController::class, 'showForGuest'])->name('news.showForGuest');
+
 //route login dan register
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login_proses', [LoginController::class, 'login_proses'])->name('login_proses');
@@ -58,4 +62,3 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'show'])->name('admin.profile.show');
     Route::put('/profile', [ProfileController::class, 'update'])->name('admin.profile.update');
 });
-Route::get('/news/{id}', [NewsController::class, 'show'])->name('news.show');

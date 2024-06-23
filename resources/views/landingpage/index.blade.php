@@ -1,3 +1,18 @@
+<?php
+use App\Models\News;
+
+// Ambil kata kunci pencarian dari URL jika ada
+$searchKeyword = isset($_GET['search']) ? $_GET['search'] : '';
+
+// Lakukan pencarian jika kata kunci tidak kosong
+if (!empty($searchKeyword)) {
+    $searchResults = News::searchByName($searchKeyword);
+} else {
+    // Jika tidak ada kata kunci, tampilkan semua berita
+    $searchResults = News::all();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -32,6 +47,18 @@
             padding: 1rem 0;
             text-align: center;
         }
+
+        .carousel-item img {
+            height: auto;
+            max-height: 400px;
+            object-fit: cover;
+        }
+
+        @media (max-width: 576px) {
+            .carousel-item img {
+                max-height: 250px;
+            }
+        }
     </style>
 </head>
 
@@ -39,7 +66,7 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Portal Berita</a>
+            <a class="navbar-brand" href="{{ '/' }}">Portal Berita</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -62,14 +89,14 @@
                         <a class="nav-link" href="#">Technology</a>
                     </li> --}}
                 </ul>
-                <form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-light" type="submit">Search</button>
+                <form class="d-flex" action="/" method="GET">
+                    <input class="form-control me-2" type="search" name="search" placeholder="Cari Berita"
+                        aria-label="Search" value="<?php echo $searchKeyword; ?>">
+                    <button class="btn btn-outline-light" type="submit">Cari</button>
                 </form>
             </div>
         </div>
     </nav>
-
     <div id="newsCarousel" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-indicators">
             @foreach ($news->take(3) as $key => $n)
@@ -81,10 +108,9 @@
         <div class="carousel-inner">
             @foreach ($news->take(3) as $key => $n)
                 <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
-                    <img src="images/{{ $n->gambar }}" class="card-img-top" alt="News Image">
+                    <img src="images/{{ $n->gambar }}" class="d-block w-100 img-fluid" alt="News Image">
                     <div class="carousel-caption d-none d-md-block">
                         <h5 class="card-title news-title">{{ $n->name }}</h5>
-                        {{-- <p>Description for headline news 1.</p> --}}
                     </div>
                 </div>
             @endforeach
@@ -99,25 +125,25 @@
         </button>
     </div>
 
+
     <!-- Main Content -->
     <div class="container mt-4">
         <div class="row">
             <div class="col-md-8">
                 <h2 class="mb-4">Latest News</h2>
                 <div class="row row-cols-1 row-cols-lg-3 g-4">
-                    @foreach ($news as $n)
-                        <!-- News Item 1 -->
-                        <div class="col">
-                            <div class="card h-100">
-                                <img src="images/{{ $n->gambar }}" class="card-img-top" alt="News Image">
-                                <div class="card-body">
-                                    <h5 class="card-title news-title">{{ $n->name }}</h5>
-                                    {{-- <p class="card-text news-content">{{ $n->isi }}</p> --}}
-                                    <a href="{{ route('news.show', $n->id) }}" class="btn btn-primary">Read More</a>
-                                </div>
+                    <?php foreach ($searchResults as $n) : ?>
+                    <!-- News Item 1 -->
+                    <div class="col">
+                        <div class="card h-100">
+                            <img src="images/<?php echo $n->gambar; ?>" class="card-img-top" alt="News Image">
+                            <div class="card-body">
+                                <h5 class="card-title news-title"><?php echo $n->name; ?></h5>
+                                <a href="<?php echo route('news.showForGuest', $n->id); ?>" class="btn btn-secondary">Baca Selengkapnya</a>
                             </div>
                         </div>
-                    @endforeach
+                    </div>
+                    <?php endforeach; ?>
                 </div>
             </div>
 
@@ -148,6 +174,5 @@
         integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous">
     </script>
 </body>
-
 
 </html>

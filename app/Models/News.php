@@ -18,4 +18,9 @@ class News extends Model
     {
         return $query->where('id_kategori', $id_kategori);
     }
+
+    public static function searchByName($keyword)
+    {
+        return News::where('name', 'LIKE', "%$keyword%")->get();
+    }
 }
