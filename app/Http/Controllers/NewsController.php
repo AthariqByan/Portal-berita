@@ -62,7 +62,6 @@ class NewsController extends Controller
     public function show($id)
     {
         $news = News::findOrFail($id);
-        $news = News::with('kategori')->findOrFail($id);
         return view('news.show', compact('news'));
     }
 

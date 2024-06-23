@@ -73,21 +73,6 @@ if (!empty($searchKeyword)) {
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    {{-- <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">News</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Sports</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Entertainment</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Technology</a>
-                    </li> --}}
                 </ul>
                 <form class="d-flex" action="/" method="GET">
                     <input class="form-control me-2" type="search" name="search" placeholder="Cari Berita"
@@ -124,7 +109,6 @@ if (!empty($searchKeyword)) {
             <span class="visually-hidden">Next</span>
         </button>
     </div>
-
 
     <!-- Main Content -->
     <div class="container mt-4">
